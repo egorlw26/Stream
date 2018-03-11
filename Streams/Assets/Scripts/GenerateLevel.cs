@@ -19,11 +19,25 @@ public class GenerateLevel : MonoBehaviour
             if (i == 0)
                 Instantiate(Resources.Load("StartValve", typeof(GameObject)), vertecies[i], Quaternion.identity);
             else if (i == vertecies.Count - 1)
-            {
-
-            }
+                Instantiate(Resources.Load("FinishValve", typeof(GameObject)), vertecies[i], Quaternion.identity);
             else
                 Instantiate(Resources.Load("Valve", typeof(GameObject)), vertecies[i], Quaternion.identity);
+        }
+
+        CreateGraph();
+        for (int i = 0; i < vertecies.Count; i++)
+        {
+            for (int j = 0; j < graph[i].Count; j++)
+            {
+                float x = (vertecies[i].x + graph[i][j].x) / 2.0f;
+                float y = (vertecies[i].y + graph[i][j].y) / 2.0f;
+                Vector2 pos = new Vector2(x, y);
+                GameObject trumpet = Instantiate(Resources.Load("TrumpetWithAnima", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
+                float dy = (graph[i][j].y - vertecies[i].y);
+                float dx = (graph[i][j].x - vertecies[i].x);
+                float angle = Mathf.Atan2(dy,dx) * 180.0f / Mathf.PI;
+                trumpet.transform.Rotate(new Vector3(0,0,angle));
+            }
         }
     }
 
@@ -49,6 +63,20 @@ public class GenerateLevel : MonoBehaviour
             }
 
             if (ok) vertecies.Add(newVertex);
+        }
+    }
+
+    void CreateGraph()
+    {
+        graph = new List<List<Vector2>>();
+        for (int i = 0; i < vertecies.Count; i++)
+        {
+            graph.Add(new List<Vector2>());
+            int c = Random.Range(2, 5);
+            for (int j = i + 1; j < vertecies.Count && j - i < c; j++)
+            {
+                graph[i].Add(vertecies[j]);
+            }
         }
     }
 

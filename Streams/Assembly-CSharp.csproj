@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\ButtonsClick.cs" />
-     <Compile Include="Assets\Scripts\GenerateLevel.cs" />
      <Compile Include="Assets\Scripts\OnValveDown.cs" />
      <Compile Include="Assets\Scripts\StartButtonDown.cs" />
  <Reference Include="UnityEngine.UI">
