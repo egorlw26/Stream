@@ -31,12 +31,13 @@ public class GenerateLevel : MonoBehaviour
             {
                 float x = (vertecies[i].x + graph[i][j].x) / 2.0f;
                 float y = (vertecies[i].y + graph[i][j].y) / 2.0f;
-                Vector2 pos = new Vector2(x, y);
+                Vector3 pos = new Vector3(x, y, -1);
                 GameObject trumpet = Instantiate(Resources.Load("TrumpetWithAnima", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
                 float dy = (graph[i][j].y - vertecies[i].y);
                 float dx = (graph[i][j].x - vertecies[i].x);
-                float angle = Mathf.Atan2(dy,dx) * 180.0f / Mathf.PI;
-                trumpet.transform.Rotate(new Vector3(0,0,angle));
+                float angle = Mathf.Atan2(dy, dx) * 180.0f / Mathf.PI;
+                trumpet.transform.Rotate(new Vector3(0, 0, angle));
+                trumpet.transform.localScale += new Vector3(Vector2.Distance(vertecies[i], graph[i][j]), -0.75f, 0);
             }
         }
     }
