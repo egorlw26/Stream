@@ -37,7 +37,7 @@ public class GenerateLevel : MonoBehaviour
                 float dx = (graph[i][j].x - vertecies[i].x);
                 float angle = Mathf.Atan2(dy, dx) * 180.0f / Mathf.PI;
                 trumpet.transform.Rotate(new Vector3(0, 0, angle));
-                trumpet.transform.localScale += new Vector3(Vector2.Distance(vertecies[i], graph[i][j]), -0.75f, 0);
+                trumpet.transform.localScale += new Vector3(Vector2.Distance(vertecies[i], graph[i][j]), -0.5f, 0);
             }
         }
     }
@@ -73,7 +73,7 @@ public class GenerateLevel : MonoBehaviour
         for (int i = 0; i < vertecies.Count; i++)
         {
             graph.Add(new List<Vector2>());
-            int c = Random.Range(2, 5);
+            int c = Random.Range(3, 5);
             for (int j = i + 1; j < vertecies.Count && j - i < c; j++)
             {
                 graph[i].Add(vertecies[j]);
